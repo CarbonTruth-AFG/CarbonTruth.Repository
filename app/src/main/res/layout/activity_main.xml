@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/firstnumlabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/firstNumLabelStr"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/firstNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/EnterNumHintStr"
+            android:inputType="numberDecimal"
+            android:textSize="24sp"
+            android:autofillHints="" />
+
+        <TextView
+            android:id="@+id/secondNumLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="24sp"
+            tools:text="@string/secondNumLabelStr" />
+
+        <EditText
+            android:id="@+id/secondNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/EnterNumHintStr"
+            android:inputType="numberSigned|numberDecimal"
+            android:textSize="24sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintButtonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="performAddition"
+                android:text="@string/addButton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/subButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/subButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="performSubtraction"
+                android:text="@string/subButton"
+                app:layout_constraintEnd_toStartOf="@+id/multButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/addButton"
+                app:layout_constraintTop_toTopOf="@+id/addButton" />
+
+            <Button
+                android:id="@+id/multButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="performMultiplication"
+                android:text="@string/multButton"
+                app:layout_constraintEnd_toStartOf="@+id/divButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/subButton"
+                app:layout_constraintTop_toTopOf="@+id/subButton" />
+
+            <Button
+                android:id="@+id/divButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="performDivision"
+                android:text="@string/divButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/multButton"
+                app:layout_constraintTop_toTopOf="@+id/multButton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/answerLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/answerLabel"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
