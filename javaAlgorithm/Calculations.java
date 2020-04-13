@@ -1,10 +1,14 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 public class Calculations 
 {
 	//footprint==tons of carbon per year
 	double footprint;
 	HashMap<String, Double> foods;
-	HashMap<String, Double> cars;
+	HashMap<String, Double> vehicles;
 	
 	
 	//input variables
@@ -15,23 +19,17 @@ public class Calculations
 		double transportationFootprint=transportationCalculations(givenMiles, vehicleType);
 		footprint=foodFootprint+transportationFootprint;
 	}
-	
-	private void initializeHashmaps() 
-	{
-		// TODO Auto-generated method stub
-		
-	}
 
 	//do calculations
 	public double transportationCalculations(double givenMiles, String vehicleType)
 	{
 		//get mpg based on cartype.
 		double mpg=25.0;
-		for (String vehicle:cars.keySet())
+		for (String vehicle:vehicles.keySet())
 		{
 			if (vehicleType.equals(vehicle))
 			{
-				mpg=cars.get(vehicle);
+				mpg=vehicles.get(vehicle);
 			}
 		}
 		
@@ -65,9 +63,45 @@ public class Calculations
 		return totalTonsperYear;
 	}
 	
+	
+	
 	//output the variables
 	public double getFootprint()
 	{
 		return footprint;
 	}
+	
+	private void initializeHashmaps()
+	{
+		readAndInitializeHashmapData("file name for cars", vehicles);
+		readAndInitializeHashmapData("file name for food", foods);
+	}
+	
+	//code from TriviaGame where CSV file is read.
+	 private void readAndInitializeHashmapData(String fileName, HashMap<String, Double> hashmap)
+	    {
+		 	//getResources() is an Android Studio command, looking for resources in the project.
+	        InputStream is = getResources().openRawResource(R.raw.fileName);
+
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+	        String line = "";
+	        try
+	        {
+	            while ((line = reader.readLine())!=null)
+	            {
+	                String[] fields = line.split(",");
+
+	                hashmap.put(fields[0], Double.parseDouble(fields[1]));
+
+	                //this is for decoding purposes only
+	                //Log.v("MainActivity", fields[0] + " " + fields[1]);
+	            }
+	        }
+	        catch(IOException e)
+	        {
+	            //again, only for decoding purposes
+	        	//Log.wtf("MainActivity", "Error reading data on line: "+line);
+	        }
+	    }
 }
