@@ -2,14 +2,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 public class Calculations 
 {
 	//footprint==tons of carbon per year
-	double footprint;
-	HashMap<String, Double> foods;
-	HashMap<String, Double> vehicles;
-	
+	private double footprint;
+	private HashMap<String, Double> foodLibrary;
+	private HashMap<String, Double> vehicleLibrary;
 	
 	//input variables
 	public Calculations(String givenMeat, String givenDairy, String givenFat, String givenGrain, double unitsMeat, double unitsVegFruit, double unitsDairy, double unitsFats, double unitsGrain, double givenMiles, String vehicleType)
@@ -25,11 +25,11 @@ public class Calculations
 	{
 		//get mpg based on cartype.
 		double mpg=25.0;
-		for (String vehicle:vehicles.keySet())
+		for (String vehicle:vehicleLibrary.keySet())
 		{
 			if (vehicleType.equals(vehicle))
 			{
-				mpg=vehicles.get(vehicle);
+				mpg=vehicleLibrary.get(vehicle);
 			}
 		}
 		
@@ -68,13 +68,14 @@ public class Calculations
 	//output the variables
 	public double getFootprint()
 	{
+		//change from tons per year to lbs per day
 		return footprint;
 	}
 	
 	private void initializeHashmaps()
 	{
-		readAndInitializeHashmapData("file name for cars", vehicles);
-		readAndInitializeHashmapData("file name for food", foods);
+		readAndInitializeHashmapData("file name for cars", vehicleLibrary);
+		readAndInitializeHashmapData("file name for food", foodLibrary);
 	}
 	
 	//code from TriviaGame where CSV file is read.
